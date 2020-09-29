@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "176262425906",
+    "firebase_url": "https://lifecure-27450.firebaseio.com",
+    "project_id": "lifecure-27450",
+    "storage_bucket": "lifecure-27450.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176262425906:android:5ecd68567b5c7c0cb0bb2b",
+        "android_client_info": {
+          "package_name": "com.peter_majorosy.lifecure_allergycalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176262425906-oh0mi499dcgqhhptefeo1956cec932ko.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.peter_majorosy.lifecure_allergycalendar",
+            "certificate_hash": "b3c777590e6a4d8f6f67a2e4abbb4541dbfd1af4"
+          }
+        },
+        {
+          "client_id": "176262425906-j9cei8mftjmsh3lec5gu3veplqeunpb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9w0DLUqkc4OY600uD-lzp_VLV2DNusnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176262425906-j9cei8mftjmsh3lec5gu3veplqeunpb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
