@@ -3,9 +3,11 @@ package com.peter_majorosy.lifecure_allergycalendar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity() {
@@ -42,7 +44,7 @@ class SignupActivity : AppCompatActivity() {
             regpw1.requestFocus()
             return
         }
-        if(!regpw1.text.toString().equals(regpw2.text.toString())){
+        if(!regpw1.text.toString().equals(regpw2.text.toString())) {
             regpw2.error = "Those passwords didn't match. Try again."
             regpw2.requestFocus()
             return
@@ -54,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(baseContext, "Registration failed. Please try again a few minutes later.",
+                    Toast.makeText(baseContext, "Registration failed.",
                         Toast.LENGTH_SHORT).show()
                 }
             }
