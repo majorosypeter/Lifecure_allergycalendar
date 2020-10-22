@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> makeCurrentFragment(homeFragment)
                 R.id.calendar -> makeCurrentFragment(calendarFragment)
-                R.id.review -> makeCurrentFragment(foodFragment)
+                R.id.database -> makeCurrentFragment(foodFragment)
             }
             true
         }

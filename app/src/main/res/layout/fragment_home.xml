@@ -21,36 +21,43 @@
         android:id="@+id/ateToday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
         android:ems="10"
         android:hint="Food name"
-        app:layout_constraintBottom_toTopOf="@id/symptoms"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        android:layout_margin="25dp"/>
 
     <EditText
         android:id="@+id/symptoms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Symptoms"
-        app:layout_constraintTop_toBottomOf="@id/ateToday"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/homeAddButton"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"/>
+        android:hint="Symptom"
+        app:layout_constraintTop_toBottomOf="@id/btnAddFood"
+        app:layout_constraintBottom_toTopOf="@id/btnAddSymptom"
+        android:layout_margin="25dp"/>
 
     <Button
-        android:id="@+id/homeAddButton"
+        android:id="@+id/btnAddSymptom"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners"
         android:text="Add to calendar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/symptoms" />
+        app:layout_constraintTop_toBottomOf="@+id/symptoms"
+        android:layout_margin="25dp"/>
 
+    <Button
+        android:id="@+id/btnAddFood"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners"
+        android:text="Add to calendar"
+        app:layout_constraintBottom_toTopOf="@id/symptoms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ateToday"
+        android:layout_margin="25dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

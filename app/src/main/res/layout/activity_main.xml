@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <View
-        android:layout_width="600dp"
-        android:layout_height="600dp"
+        android:layout_width="700dp"
+        android:layout_height="700dp"
         android:background="@drawable/custom_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,9 +26,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#508DFD"
+        android:background="@drawable/rounded_corners"
         app:layout_constraintBottom_toBottomOf="@+id/fl_wrapper"
-        app:menu="@menu/bottom_navigation" />
+        app:menu="@menu/bottom_navigation"
+        android:layout_margin="6dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

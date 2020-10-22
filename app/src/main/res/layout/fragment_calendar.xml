@@ -7,13 +7,16 @@
     tools:context=".fragments.CalendarFragment">
 
 
-
-
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="24dp" />
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#EAEAEA"
+        android:layout_margin="10dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

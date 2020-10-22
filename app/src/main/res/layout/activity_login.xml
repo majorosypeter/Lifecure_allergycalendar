@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <View xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="600dp"
-        android:layout_height="600dp"
-        android:layout_marginLeft="-230dp"
-        android:layout_marginTop="-230dp"
+    <View
+        android:layout_width="700dp"
+        android:layout_height="700dp"
         android:background="@drawable/custom_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
     </View>
 
     <EditText
