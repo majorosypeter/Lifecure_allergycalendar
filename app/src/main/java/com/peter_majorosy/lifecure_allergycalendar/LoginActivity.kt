@@ -30,12 +30,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login() {
         if (logemail.text.toString().isEmpty()) {
-            logemail.error = "Please enter email."
+            logemail.error = "This field can not be empty"
             logemail.requestFocus()
             return
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(logemail.text.toString()).matches()) {
-            logemail.error = "Please enter a valid email."
+            logemail.error = "Please enter a valid email"
             logemail.requestFocus()
             return
         }

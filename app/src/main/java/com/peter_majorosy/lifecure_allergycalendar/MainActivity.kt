@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         val calendarFragment = CalendarFragment()
         val foodFragment = FoodFragment()
 
-        bottomnav.setSelectedItemId(R.id.home)
+        bottomnav.selectedItemId
 
         makeCurrentFragment(homeFragment)
 

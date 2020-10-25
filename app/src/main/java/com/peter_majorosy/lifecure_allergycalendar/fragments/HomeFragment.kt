@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.peter_majorosy.lifecure_allergycalendar.R
 import com.peter_majorosy.lifecure_allergycalendar.data.AppDatabase
 import com.peter_majorosy.lifecure_allergycalendar.data.FoodModel
@@ -34,12 +35,15 @@ class HomeFragment : Fragment() {
 
             val food = FoodModel(null, ateToday.text.toString(), currentDate.toString())
 
-
-            val dbThread = Thread {
-                AppDatabase.getInstance(this.context!!).dataDAO().insertFood(food)
+            if (ateToday.text.isEmpty()) {
+                ateToday.error = "This field can not be empty"
+            } else {
+                Thread {
+                    AppDatabase.getInstance(this.context!!).dataDAO().insertFood(food)
+                }.start()
+                ateToday.text.clear()
+                Toast.makeText(activity, "Succesfully added to calendar", Toast.LENGTH_SHORT).show()
             }
-            dbThread.start()
-
         }
 
         btnAddSymptom.setOnClickListener {
@@ -49,10 +53,15 @@ class HomeFragment : Fragment() {
 
             val symptom = SymptomModel(null, symptoms.text.toString(), currentDate.toString())
 
-            val dbThread = Thread {
-                AppDatabase.getInstance(this.context!!).dataDAO().insertSymptom(symptom)
+            if(symptoms.text.isEmpty()){
+                symptoms.error = "This field can not be empty"
+            } else {
+                Thread {
+                    AppDatabase.getInstance(this.context!!).dataDAO().insertSymptom(symptom)
+                }.start()
+                ateToday.text.clear()
+                Toast.makeText(activity, "Succesfully added to calendar", Toast.LENGTH_SHORT).show()        //Issuccesful?
             }
-            dbThread.start()
 
         }
     }
