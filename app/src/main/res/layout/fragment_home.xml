@@ -6,6 +6,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
 
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddSymptom" />
+
+
+
+    <ImageView
+        android:id="@+id/btn_logout"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/rounded_corners"
+        android:padding="6dp"
+        android:clickable="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_logout"
+        android:layout_marginEnd="6dp"/>
+
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -19,22 +51,28 @@
 
     <EditText
         android:id="@+id/ateToday"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_margin="25dp"
+        android:background="@drawable/et_custom"
         android:hint="Food name"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        android:layout_margin="25dp"/>
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <EditText
         android:id="@+id/symptoms"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_margin="25dp"
+        android:background="@drawable/et_custom"
         android:hint="Symptom"
-        app:layout_constraintTop_toBottomOf="@id/btnAddFood"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@id/btnAddSymptom"
-        android:layout_margin="25dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAddFood" />
 
     <Button
         android:id="@+id/btnAddSymptom"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FoodFragment">
+    tools:context=".fragments.DatabaseFragment">
 
 
     <TextView
@@ -19,28 +19,18 @@
         android:textSize="24dp"
         />
 
-    <TextView
-        android:id="@+id/header_food_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please be accurate during the process"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_food"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:textSize="16dp"
-        />
-
     <Button
         android:id="@+id/foodAddButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Add new"
         android:background="@drawable/rounded_corners"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:drawableStart="@drawable/ic_add"
+        android:paddingStart="20dp"
+        android:text="Add to database"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ingredients" />
+        app:layout_constraintTop_toBottomOf="@id/foodname"
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/foodSearchButton"
@@ -52,31 +42,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodAddButton"
         android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/ic_search"
+        android:paddingStart="20dp"
         />
 
     <EditText
         android:id="@+id/foodname"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/et_custom"
         android:hint="Food name"
-        app:layout_constraintBottom_toTopOf="@id/ingredients"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_food_bottom"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/header_food" />
 
-    <EditText
-        android:id="@+id/ingredients"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Ingredients"
-        app:layout_constraintTop_toBottomOf="@id/header_food"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/foodAddButton"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
