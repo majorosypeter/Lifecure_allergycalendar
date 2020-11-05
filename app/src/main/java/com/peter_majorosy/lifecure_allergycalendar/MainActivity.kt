@@ -27,14 +27,14 @@ class MainActivity : AppCompatActivity() {
         makeCurrentFragment(homeFragment)
 
         bottomnav.setOnNavigationItemSelectedListener {
-            when(it.itemId){
+            //kattintásnak megfelelően fl_wrapper helyére fragment betöltése
+            when (it.itemId) {
                 R.id.home -> makeCurrentFragment(homeFragment)
                 R.id.calendar -> makeCurrentFragment(calendarFragment)
                 R.id.database -> makeCurrentFragment(foodFragment)
             }
             true
         }
-
 
 
     }

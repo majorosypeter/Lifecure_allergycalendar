@@ -9,7 +9,7 @@
         android:id="@+id/tv_addatabasetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new food"
+        android:text="@string/ADD_NEW_FOOD"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,51 +21,53 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/et_custom"
-        android:hint="Food name"
+        android:hint="@string/HINT_FOOD_NAME"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_addatabasetitle"
         android:layout_marginTop="15dp"
         android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"/>
+        android:layout_marginEnd="6dp"
+        android:inputType="text"/>
 
     <EditText
-        android:id="@+id/ingredients"
+        android:id="@+id/et_ingredients"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/et_custom"
-        android:hint="Ingredients"
+        android:hint="@string/INGREDIENTS"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_foodname"
         android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"/>
+        android:layout_marginEnd="6dp"
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/btn_dbadd"
+        android:id="@+id/btn_dbpublish"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corners"
-        android:text="Add"
+        android:background="@drawable/btn_rounded_corners"
+        android:text="@string/PUBLISH"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_dbcancel"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients"
+        app:layout_constraintTop_toBottomOf="@+id/et_ingredients"
         android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/btn_dbcancel"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corners"
-        android:text="Cancel"
+        android:background="@drawable/btn_rounded_corners"
+        android:text="@string/CANCEL"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_dbadd"
+        app:layout_constraintEnd_toStartOf="@+id/btn_dbpublish"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients"
+        app:layout_constraintTop_toBottomOf="@+id/et_ingredients"
         android:layout_margin="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

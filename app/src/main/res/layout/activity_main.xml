@@ -11,18 +11,18 @@
         android:id="@+id/fl_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomnav"
-        />
+        android:layout_above="@+id/bottomnav"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/rounded_corners"
+        android:background="@drawable/btn_rounded_corners"
         app:layout_constraintBottom_toBottomOf="@+id/fl_wrapper"
         app:menu="@menu/bottom_navigation"
-        android:layout_margin="6dp"/>
+        android:layout_margin="6dp"
+        />
 
 
 

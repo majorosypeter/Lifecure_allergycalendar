@@ -9,12 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.peter_majorosy.lifecure_allergycalendar.LoginActivity
-import com.peter_majorosy.lifecure_allergycalendar.MainActivity
 import com.peter_majorosy.lifecure_allergycalendar.R
-import com.peter_majorosy.lifecure_allergycalendar.TestActivity
 import com.peter_majorosy.lifecure_allergycalendar.data.AppDatabase
-import com.peter_majorosy.lifecure_allergycalendar.data.FoodModel
-import com.peter_majorosy.lifecure_allergycalendar.data.SymptomModel
+import com.peter_majorosy.lifecure_allergycalendar.data.DataModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,52 +35,46 @@ class HomeFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        val sdf = SimpleDateFormat("yyyy.MM.dd")
+        val currentDate = sdf.format(Date())
+
         btnAddFood.setOnClickListener {
 
-            val sdf = SimpleDateFormat("yyyy.MM.dd")
-            val currentDate = sdf.format(Date())
-
-            val food = FoodModel(null, ateToday.text.toString(), currentDate.toString())
+            val data =
+                DataModel(null, ateToday.text.toString(), currentDate.toString(), isFood = true)
 
             if (ateToday.text.isEmpty()) {
                 ateToday.error = "This field can not be empty"
             } else {
-                Thread {
-                    AppDatabase.getInstance(view.context).dataDAO().insertFood(food)
-                }.start()
-                ateToday.text.clear()
-                Toast.makeText(activity, "Succesfully added to calendar", Toast.LENGTH_SHORT).show()
+                addData(data)
             }
         }
 
         btnAddSymptom.setOnClickListener {
+            val data =
+                DataModel(null, symptoms.text.toString(), currentDate.toString(), isFood = false)
 
-            val sdf = SimpleDateFormat("yyyy.MM.dd")
-            val currentDate = sdf.format(Date())
-
-            val symptom = SymptomModel(null, symptoms.text.toString(), currentDate.toString())
-
-            if(symptoms.text.isEmpty()){
+            if (symptoms.text.isEmpty()) {
                 symptoms.error = "This field can not be empty"
             } else {
-                Thread {
-                    AppDatabase.getInstance(view.context).dataDAO().insertSymptom(symptom)
-                }.start()
-                symptoms.text.clear()
-                Toast.makeText(activity, "Succesfully added to calendar", Toast.LENGTH_SHORT).show()        //Issuccesful?
+                addData(data)
             }
-
         }
 
         btn_logout.setOnClickListener {
-            var firebaseuser = auth.currentUser
             auth.signOut()
             startActivity(Intent(this.context, LoginActivity::class.java))
         }
 
-        btn_test.setOnClickListener {
-            startActivity(Intent(this.context, TestActivity::class.java))
-        }
 
+    }
+
+    private fun addData(data: DataModel) {
+        Thread {
+            AppDatabase.getInstance(this.context!!).dataDAO().insertData(data)
+        }.start()
+        ateToday.text.clear()
+        symptoms.text.clear()
+        Toast.makeText(activity, "Succesfully added to calendar", Toast.LENGTH_SHORT).show()
     }
 }

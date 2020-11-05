@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import com.peter_majorosy.lifecure_allergycalendar.DatabaseAddFragment
+import android.widget.Toast
+import com.google.firebase.firestore.FirebaseFirestore
 import com.peter_majorosy.lifecure_allergycalendar.R
 import kotlinx.android.synthetic.main.fragment_database.*
 
@@ -23,15 +23,42 @@ class DatabaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var dbfragment = DatabaseAddFragment()
+        val dbfragment = DatabaseAddFragment()
 
         foodAddButton.setOnClickListener {
-            //Dialog fragment hívás, foodname et átadása?
+
+            //TODO: edittext értékét átadni a másik fragmentnek
+            //Dialog fragment hívás
+
             dbfragment.show(fragmentManager!!, "databaseaddfragment")
         }
 
         foodSearchButton.setOnClickListener {
-            //Kilistázás valahogyan
+            //A megadott nevű dokumentum megkeresése
+            val db = FirebaseFirestore.getInstance()
+
+            val foodQuery = db.collection("Food").whereEqualTo("foodName", foodname.text.toString())
+
+            foodQuery.get().addOnCompleteListener { p0 ->
+                if (p0.isSuccessful) {
+                    for (data in p0.result!!) {
+                        val foodName = data.get("foodName").toString()
+                        val ingredients = data.get("ingredients").toString()
+
+                        tv_resultname.text = foodName
+                        tv_resultingredients.text = ingredients
+                    }
+                } else {
+                    Toast.makeText(this.context!!,
+                        "Could not find $foodname in the database",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     }
+
+
 }
+
+

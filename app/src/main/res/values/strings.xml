@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">Lifecure</string>
+    <string name="NOT_REG">Not registered yet? Create an account!</string>
+    <string name="SIGN_IN">Sign in</string>
+    <string name="PASSWORD">Password</string>
+    <string name="LOGIN">Login</string>
+    <string name="NAME">Name</string>
+    <string name="CREATE_ACCOUNT">Create a new account</string>
+    <string name="REGISTER">Register</string>
+    <string name="ALREADY_REG">Already registered? Sign in here!</string>
+    <string name="HEADER_DATABASE">Upload or search for food with ingredients</string>
+    <string name="ADD_TO_DB">Add to database</string>
+    <string name="SEARCH">Search</string>
+    <string name="HINT_FOOD_NAME">Food name</string>
+    <string name="ADD_NEW_FOOD">Add new food</string>
+    <string name="INGREDIENTS">Ingredients</string>
+    <string name="PUBLISH">Publish</string>
+    <string name="CANCEL">Cancel</string>
+    <string name="LOG_OUT">Log out</string>
+    <string name="HEADER_HOME">What did I eat today?</string>
+    <string name="SYMPTOM">Symptom</string>
+    <string name="ADD_TO_CALENDAR">Add to calendar</string>
 
 </resources>

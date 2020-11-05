@@ -1,29 +1,21 @@
 package com.peter_majorosy.lifecure_allergycalendar.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 
 @Dao
 interface DataDAO {
-    @Query("SELECT * FROM Food WHERE date = :date")
-    fun getSpecificFood(date: String): LiveData<List<FoodModel>>
+    @Query("SELECT * FROM Data WHERE date = :date")
+    fun getSpecificData(date: String): LiveData<List<DataModel>>
 
-    @Query("SELECT * FROM Food")
-    fun getAllFood(): LiveData<List<FoodModel>>
-
-    @Query("SELECT * FROM Symptom WHERE date = :date")
-    fun getSpecificSymptom(date: String): LiveData<List<SymptomModel>>
+    @Query("SELECT * FROM Data")
+    fun getAllData(): LiveData<List<DataModel>>
 
     @Insert
-    fun insertFood(data: FoodModel)
-
-    @Insert
-    fun insertSymptom(data: SymptomModel)
+    fun insertData(data: DataModel)
 
     @Delete
-    fun deleteData(data: FoodModel)
+    fun deleteData(data: DataModel)
+
 }
