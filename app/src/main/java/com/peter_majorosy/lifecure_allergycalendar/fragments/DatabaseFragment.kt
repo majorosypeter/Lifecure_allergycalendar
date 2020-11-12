@@ -6,11 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
+import com.peter_majorosy.lifecure_allergycalendar.Firebase.FirebaseModel
 import com.peter_majorosy.lifecure_allergycalendar.R
+import com.peter_majorosy.lifecure_allergycalendar.adapter.RvDbAdapter
 import kotlinx.android.synthetic.main.fragment_database.*
+import kotlinx.android.synthetic.main.fragment_database.view.*
 
 class DatabaseFragment : Fragment() {
+
+    private var db = FirebaseFirestore.getInstance()
+    private var collectionref = db.collection("Food")
+    private lateinit var adapter: RvDbAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,45 +31,37 @@ class DatabaseFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_database, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-        val dbfragment = DatabaseAddFragment()
+        setUpRv()
 
-        foodAddButton.setOnClickListener {
-
-            //TODO: edittext értékét átadni a másik fragmentnek
-            //Dialog fragment hívás
-
-            dbfragment.show(fragmentManager!!, "databaseaddfragment")
-        }
-
-        foodSearchButton.setOnClickListener {
-            //A megadott nevű dokumentum megkeresése
-            val db = FirebaseFirestore.getInstance()
-
-            val foodQuery = db.collection("Food").whereEqualTo("foodName", foodname.text.toString())
-
-            foodQuery.get().addOnCompleteListener { p0 ->
-                if (p0.isSuccessful) {
-                    for (data in p0.result!!) {
-                        val foodName = data.get("foodName").toString()
-                        val ingredients = data.get("ingredients").toString()
-
-                        tv_resultname.text = foodName
-                        tv_resultingredients.text = ingredients
-                    }
-                } else {
-                    Toast.makeText(this.context!!,
-                        "Could not find $foodname in the database",
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
-
+        fab_db.setOnClickListener {
+            var addFragment = DatabaseAddFragment()
+            addFragment.show(fragmentManager!!, "databaseaddfragment")
         }
     }
 
+    private fun setUpRv() {
+        var query = collectionref
+        var options: FirestoreRecyclerOptions<FirebaseModel> =
+            FirestoreRecyclerOptions.Builder<FirebaseModel>()
+                .setQuery(query, FirebaseModel::class.java)
+                .build()
 
+        adapter = RvDbAdapter(options)
+        rv_db.layoutManager =
+            LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
+        rv_db.adapter = adapter
+    }
+
+    override fun onStart() {
+        super.onStart()
+        adapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
+    }
 }
-
-

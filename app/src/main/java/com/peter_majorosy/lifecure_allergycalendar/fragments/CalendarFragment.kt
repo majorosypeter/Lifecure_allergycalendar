@@ -43,10 +43,10 @@ class CalendarFragment : Fragment() {
             perfectMonth = if (monthbugfix < 10) "0$monthbugfix"
             else "$monthbugfix"
             val dateselected = "$year.$perfectMonth.$day"
-            Toast.makeText(activity, dateselected, Toast.LENGTH_SHORT).show()
 
             //formátum tesztelése
             Log.d("dateselected", dateselected)
+
 
             AppDatabase.getInstance(this.context!!).dataDAO().getSpecificData(dateselected)
                 .observe(this, androidx.lifecycle.Observer { items ->

@@ -8,10 +8,13 @@ import android.util.Patterns
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private var db = FirebaseFirestore.getInstance()
+    private var reference = db.collection("User")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,11 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun regUser() {
+        if (regname.text.toString().isEmpty()) {
+            regname.error = "Please enter email."
+            regname.requestFocus()
+            return
+        }
         if (regemail.text.toString().isEmpty()) {
             regemail.error = "Please enter email."
             regemail.requestFocus()
@@ -58,6 +66,13 @@ class SignupActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(regemail.text.toString(), regpw1.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+
+                    val user: MutableMap<String, Any> = HashMap()
+                    user["name"] = regname.text.toString()
+                    user["uid"] = auth.uid.toString()
+                    reference.document(auth.currentUser?.uid.toString()).set(user)
+
+
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
                 } else {

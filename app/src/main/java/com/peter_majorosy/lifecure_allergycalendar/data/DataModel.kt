@@ -10,5 +10,6 @@ data class DataModel(
     @PrimaryKey(autoGenerate = true) var dataId: Long?,
     @ColumnInfo(name = "dataName") var dataName: String,
     @ColumnInfo(name = "date") var date: String,
-    @ColumnInfo(name = "isFood") var isFood: Boolean
+    @ColumnInfo(name = "isFood") var isFood: Boolean,
+    @ColumnInfo(name = "severity") var severity: Int?
 ) : Serializable

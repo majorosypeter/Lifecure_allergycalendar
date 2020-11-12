@@ -23,6 +23,16 @@
         android:textSize="16sp"
         tools:text="Dummy" />
 
+    <TextView
+        android:id="@+id/tv_severity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="0.5"
+        android:textSize="16sp"
+        tools:text="Y" />
+
     <ImageView
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"

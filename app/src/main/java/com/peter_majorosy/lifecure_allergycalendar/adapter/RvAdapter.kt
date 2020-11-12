@@ -26,7 +26,7 @@ class RvAdapter(var context: Context) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvItem: TextView = itemView.tv_rvdata
         var emoticon: ImageView = itemView.emoticon
-
+        val severity: TextView = itemView.tv_severity
         //Deletebutton
         val btnDelete: ImageView = itemView.btn_delete
     }
@@ -40,6 +40,10 @@ class RvAdapter(var context: Context) :
     //Értékadás, mi jelenjen meg egy soron (sorok száma függvényében kerül meghívásra)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position)
+        //default értékek betöltése, az újrafelhasználási hiba elkerülésére
+        holder.emoticon.setImageResource(R.drawable.ic_food_emoticon)
+        holder.severity.text = ""
+
 
         holder.adapterPosition
         holder.tvItem.text = data.dataName
@@ -48,6 +52,7 @@ class RvAdapter(var context: Context) :
             holder.emoticon.setImageResource(R.drawable.ic_food_emoticon)
         } else {
             holder.emoticon.setImageResource(R.drawable.ic_symptom_emoticon)
+            holder.severity.text = "Severity: ${data.severity}"
         }
 
         //Gombokra állítható eseménykezelő
