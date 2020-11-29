@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.peter_majorosy.lifecure_allergycalendar.R
@@ -14,6 +15,11 @@ import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.fragment_databaseadd.*
 
 class DatabaseAddFragment : DialogFragment() {
+
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,18 +53,14 @@ class DatabaseAddFragment : DialogFragment() {
     }
 
     private fun saveToFirestore(foodName: String, ingredients: String) {
-        val db = FirebaseFirestore.getInstance()
         //létrehozom a documentumot, majd később adom hozzá a fieldeket, így az id beírható
-        var docref = db.collection("Food").document()
+        val fooddocref = db.collection("Food").document()
         val food: MutableMap<String, Any> = HashMap()
         food["foodName"] = foodName
         food["ingredients"] = ingredients
-        food["id"] = docref.id
-        food["author"] = ""                                 //TODO
+        food["id"] = fooddocref.id
 
-        Log.d("hashmap", foodName + ingredients)
-
-        docref.set(food).addOnSuccessListener {
+        fooddocref.set(food).addOnSuccessListener {
             Toast.makeText(this.context!!,
                 "$foodName was added succesfully",
                 Toast.LENGTH_SHORT).show()
@@ -69,5 +71,12 @@ class DatabaseAddFragment : DialogFragment() {
                 "Could not add $foodName to database",
                 Toast.LENGTH_SHORT).show()
         }
+        
+        db.collection("User").document(auth.uid!!).get().addOnSuccessListener { snapshot ->
+            val author: MutableMap<String, Any> = HashMap()
+            author["author"] = snapshot.getString("name")!!
+            fooddocref.set(author, SetOptions.merge())
+        }
+
     }
 }

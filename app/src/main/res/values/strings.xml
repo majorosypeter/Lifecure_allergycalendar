@@ -20,7 +20,8 @@
     <string name="HEADER_HOME">What did I eat today?</string>
     <string name="SYMPTOM">Symptom</string>
     <string name="ADD_TO_CALENDAR">Add to calendar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="TAKE_A_PICTURE">Take a picture</string>
+    <string name="SEVERITY">Severity:</string>
+    <string name="EMAIL">E-mail</string>
 
 </resources>

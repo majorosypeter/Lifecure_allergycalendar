@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/btn_rounded_corners"
+        android:background="@drawable/cv_background"
         android:layout_margin="6dp"/>
 
     <androidx.recyclerview.widget.RecyclerView

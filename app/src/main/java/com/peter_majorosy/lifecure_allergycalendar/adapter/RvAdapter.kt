@@ -1,23 +1,22 @@
 package com.peter_majorosy.lifecure_allergycalendar.adapter
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.peter_majorosy.lifecure_allergycalendar.R
-import com.peter_majorosy.lifecure_allergycalendar.data.AppDatabase
-import com.peter_majorosy.lifecure_allergycalendar.data.DataModel
+import com.peter_majorosy.lifecure_allergycalendar.data_Room.AppDatabase
+import com.peter_majorosy.lifecure_allergycalendar.data_Room.DataModel
 import kotlinx.android.synthetic.main.rv_row.view.*
 import kotlin.concurrent.thread
+import androidx.core.graphics.drawable.toDrawable as toDrawable
 
 class RvAdapter(var context: Context) :
     ListAdapter<DataModel, RvAdapter.ViewHolder>(FoodDiffCallback()) {

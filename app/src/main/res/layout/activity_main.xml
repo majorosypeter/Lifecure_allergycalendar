@@ -11,7 +11,8 @@
         android:id="@+id/fl_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomnav"/>
+        android:layout_above="@+id/bottomnav"
+        app:layout_constraintBottom_toTopOf="@+id/bottomnav"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnav"

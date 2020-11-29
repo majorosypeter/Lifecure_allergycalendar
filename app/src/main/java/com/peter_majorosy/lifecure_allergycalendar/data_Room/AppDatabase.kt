@@ -1,4 +1,4 @@
-package com.peter_majorosy.lifecure_allergycalendar.data
+package com.peter_majorosy.lifecure_allergycalendar.data_Room
 
 import android.content.Context
 import androidx.room.Database

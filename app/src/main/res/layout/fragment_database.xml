@@ -7,36 +7,39 @@
     tools:context=".fragments.DatabaseFragment">
 
 
-    <TextView
-        android:id="@+id/header_food"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/HEADER_DATABASE"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:textSize="24sp"
-        />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_db"
         android:layout_width="wrap_content"
         android:layout_height="470dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_food"
-        android:layout_marginTop="15dp"/>
+        app:layout_constraintTop_toBottomOf="@id/et_search" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_db"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="100dp"
         android:layout_marginEnd="12dp"
+        android:layout_marginBottom="100dp"
         android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/SEARCH"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="10dp"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

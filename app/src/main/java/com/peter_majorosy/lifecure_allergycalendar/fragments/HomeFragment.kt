@@ -1,6 +1,5 @@
 package com.peter_majorosy.lifecure_allergycalendar.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,18 +8,15 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.peter_majorosy.lifecure_allergycalendar.LoginActivity
 import com.peter_majorosy.lifecure_allergycalendar.R
-import com.peter_majorosy.lifecure_allergycalendar.data.AppDatabase
-import com.peter_majorosy.lifecure_allergycalendar.data.DataModel
+import com.peter_majorosy.lifecure_allergycalendar.data_Room.AppDatabase
+import com.peter_majorosy.lifecure_allergycalendar.data_Room.DataModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeFragment : Fragment() {
 
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +30,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
 
         val sdf = SimpleDateFormat("yyyy.MM.dd")
         val currentDate = sdf.format(Date())
@@ -43,7 +38,6 @@ class HomeFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 tv_seekbar.text = progress.toString()
             }
-
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -56,18 +50,11 @@ class HomeFragment : Fragment() {
             addSymptom(currentDate)
         }
 
-        btn_logout.setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(this.context, LoginActivity::class.java))
-            activity?.finish()
-        }
-
-
     }
 
     private fun addSymptom(currentDate: String) {
         val data =
-            DataModel(null, symptoms.text.toString(), currentDate.toString(), isFood = false,
+            DataModel(null, symptoms.text.toString().trim(), currentDate, isFood = false,
                 severity = tv_seekbar.text.toString().toInt())
 
         if (symptoms.text.isEmpty()) {
@@ -84,7 +71,7 @@ class HomeFragment : Fragment() {
 
     private fun addFood(currentDate: String) {
         val data =
-            DataModel(null, ateToday.text.toString(), currentDate, isFood = true,
+            DataModel(null, ateToday.text.toString().trim(), currentDate, isFood = true,
                 severity = null)
 
         if (ateToday.text.isEmpty()) {

@@ -62,11 +62,8 @@ class RvDbAdapter(options: FirestoreRecyclerOptions<FirebaseModel>) :
                         holder.btndislike.setImageResource(R.drawable.ic_dislike_on)
                     }
                 }
-            } else {
-                holder.btnlike.setImageResource(R.drawable.ic_like_off)
-                holder.btnlike.setImageResource(R.drawable.ic_like_off)
             }
-
+        }
 
             holder.btnlike.setOnClickListener {
                 //uid alapján user megkeresése
@@ -145,7 +142,7 @@ class RvDbAdapter(options: FirestoreRecyclerOptions<FirebaseModel>) :
                     }
             }
         }
-    }
+
 
     private fun decreaseLikes(model: FirebaseModel) {
         val update = hashMapOf<String, Any>(

@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peter_majorosy.lifecure_allergycalendar.R
 import com.peter_majorosy.lifecure_allergycalendar.adapter.RvAdapter
-import com.peter_majorosy.lifecure_allergycalendar.data.AppDatabase
+import com.peter_majorosy.lifecure_allergycalendar.data_Room.AppDatabase
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 class CalendarFragment : Fragment() {
 
@@ -22,9 +23,15 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_calendar, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
+        val sdf = SimpleDateFormat("yyyy.MM.dd")
+        val currentDate = sdf.format(Date())
+
+        loadList(currentDate)
+
+        return view
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,24 +41,29 @@ class CalendarFragment : Fragment() {
         rv_calendar.layoutManager =
             LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
 
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val perfectMonth: String
-            val monthbugfix = month + 1         //2020.0.1 = január 1
 
+
+        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val day = if (dayOfMonth < 10) "0$dayOfMonth"
             else "$dayOfMonth"
-            perfectMonth = if (monthbugfix < 10) "0$monthbugfix"
-            else "$monthbugfix"
-            val dateselected = "$year.$perfectMonth.$day"
+
+            val increasedMonth = month + 1         //2020.0.1 = január 1
+            val perfectMonth = if (increasedMonth < 10) "0$increasedMonth"
+            else "$increasedMonth"
+
+            val dateSelected = "$year.$perfectMonth.$day"
 
             //formátum tesztelése
-            Log.d("dateselected", dateselected)
+            Log.d("dateselected", dateSelected)
 
-
-            AppDatabase.getInstance(this.context!!).dataDAO().getSpecificData(dateselected)
-                .observe(this, androidx.lifecycle.Observer { items ->
-                    adapter.submitList(items)
-                })
+            loadList(dateSelected)
         }
+    }
+
+    private fun loadList(dateSelected: String) {
+        AppDatabase.getInstance(this.context!!).dataDAO().getSpecificData(dateSelected)
+            .observe(this, Observer { items ->
+                adapter.submitList(items)
+            })
     }
 }

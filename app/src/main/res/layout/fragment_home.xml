@@ -6,25 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
-    <ImageView
-        android:id="@+id/btn_logout"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="6dp"
-        android:clickable="true"
-        android:padding="6dp"
-        android:src="@drawable/ic_logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp"
-        android:text="@string/LOG_OUT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_logout" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -94,7 +75,7 @@
         android:max="10"
         android:progress="0"
         android:layout_margin="20dp"
-        android:background="@drawable/et_custom"/>
+        android:background="@drawable/et_custom" />
 
     <TextView
         android:id="@+id/tv_seekbar"
@@ -112,9 +93,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="15dp"
-        android:text="Severity:"
+        android:text="@string/SEVERITY"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/symptoms"
         app:layout_constraintTop_toBottomOf="@id/symptoms" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

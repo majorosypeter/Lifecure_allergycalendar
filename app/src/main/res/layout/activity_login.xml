@@ -7,31 +7,23 @@
     tools:context=".LoginActivity"
     android:background="@drawable/background">
 
-
-    <TextView
-        android:id="@+id/appname"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textSize="30sp"
+        app:cardCornerRadius="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAllCaps="true"
-        android:textStyle="bold"/>
+        android:layout_marginTop="60dp"
+        android:id="@+id/logo">
 
-    <TextView
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:clickable="false"
-        android:text="@string/LOGIN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appname" />
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/app_logo"/>
+
+    </androidx.cardview.widget.CardView>
+
 
     <EditText
         android:id="@+id/logemail"
@@ -39,11 +31,11 @@
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="10dp"
-        android:hint="E-mail"
+        android:hint="@string/EMAIL"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         android:layout_marginTop="100dp"
         android:background="@drawable/et_custom"
         android:padding="10dp" />

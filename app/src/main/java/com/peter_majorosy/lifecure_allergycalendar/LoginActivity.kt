@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         logbutton.setOnClickListener {
-            login()
+            startSignIn()
         }
 
         notreg.setOnClickListener {
@@ -28,7 +28,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun login() {
+    public override fun onStart() {
+        super.onStart()
+        val user = auth.currentUser
+        signIn(user)
+    }
+
+    private fun startSignIn() {
         if (logemail.text.toString().isEmpty()) {
             logemail.error = "This field can not be empty"
             logemail.requestFocus()
@@ -49,25 +55,18 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    updateUI(user)
+                    signIn(user)
                 } else {
-                    updateUI(null)
+                    Toast.makeText(baseContext,
+                        "Login failed.",
+                        Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
-    public override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-
-    private fun updateUI(currentUser: FirebaseUser?) {
+    private fun signIn(currentUser: FirebaseUser?) {
         if (currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
-        } else {
-            Toast.makeText(baseContext, "Login failed.",
-                Toast.LENGTH_SHORT).show()
         }
     }
 }
