@@ -50,6 +50,14 @@ class HomeFragment : Fragment() {
             addSymptom(currentDate)
         }
 
+        btn_photo.setOnClickListener {
+            var fragment = CameraFragment()
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.fl_wrapper, fragment)
+                commit()
+            }
+        }
+
     }
 
     private fun addSymptom(currentDate: String) {

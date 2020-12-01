@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.peter_majorosy.lifecure_allergycalendar.fragments.CalendarFragment
-import com.peter_majorosy.lifecure_allergycalendar.fragments.DatabaseFragment
-import com.peter_majorosy.lifecure_allergycalendar.fragments.HomeFragment
-import com.peter_majorosy.lifecure_allergycalendar.fragments.ProfileFragment
+import com.peter_majorosy.lifecure_allergycalendar.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -23,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         val calendarFragment = CalendarFragment()
         val foodFragment = DatabaseFragment()
         val profileFragment = ProfileFragment()
+        val galleryFragment = GalleryFragment()
 
+        //kezdőoldal
         bottomnav.selectedItemId = R.id.home
 
         makeCurrentFragment(homeFragment)
@@ -35,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.calendar -> makeCurrentFragment(calendarFragment)
                 R.id.database -> makeCurrentFragment(foodFragment)
                 R.id.profile -> makeCurrentFragment(profileFragment)
+                R.id.gallery -> makeCurrentFragment(galleryFragment)
             }
             true
         }

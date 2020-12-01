@@ -23,5 +23,7 @@
     <string name="TAKE_A_PICTURE">Take a picture</string>
     <string name="SEVERITY">Severity:</string>
     <string name="EMAIL">E-mail</string>
+    <string name="UPLOAD">Upload</string>
+    <string name="TAKE_A_PIC_SENTENCE">Take a picture of your symptom</string>
 
 </resources>

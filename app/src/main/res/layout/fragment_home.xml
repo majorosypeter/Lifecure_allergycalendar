@@ -98,5 +98,26 @@
         app:layout_constraintStart_toStartOf="@+id/symptoms"
         app:layout_constraintTop_toBottomOf="@id/symptoms" />
 
+    <TextView
+        android:id="@+id/tv_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/TAKE_A_PIC_SENTENCE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_photo"
+        app:layout_constraintStart_toStartOf="@+id/symptoms" />
+
+    <Button
+        android:id="@+id/btn_photo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/btn_rounded_corners"
+        android:text="@string/TAKE_A_PICTURE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
