@@ -12,28 +12,28 @@
         android:id="@+id/regname"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/et_custom"
         android:hint="@string/NAME"
         android:inputType="textPersonName"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:background="@drawable/et_custom"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/appname"
         android:layout_width="187dp"
         android:layout_height="44dp"
+        android:layout_marginTop="150dp"
         android:text="@string/app_name"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="150dp"
-        android:textAllCaps="true"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -49,61 +49,61 @@
         android:id="@+id/regemail"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/et_custom"
         android:hint="@string/EMAIL"
         android:inputType="textEmailAddress"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regname"
-        android:background="@drawable/et_custom"
-        android:padding="10dp"
-        android:layout_marginTop="6dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/regname" />
 
     <EditText
         android:id="@+id/regpw1"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/et_custom"
         android:hint="@string/PASSWORD"
         android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regemail"
-        android:background="@drawable/et_custom"
-        android:padding="10dp"
-        android:layout_marginTop="6dp" />
+        app:layout_constraintTop_toBottomOf="@+id/regemail" />
 
     <EditText
         android:id="@+id/regpw2"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/et_custom"
         android:hint="@string/PASSWORD"
         android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regpw1"
-        android:background="@drawable/et_custom"
-        android:padding="10dp"
-        android:layout_marginTop="6dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/regpw1" />
 
     <Button
         android:id="@+id/regbutton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@drawable/btn_rounded_corners"
         android:text="@string/REGISTER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regpw2"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/regpw2" />
 
     <TextView
         android:id="@+id/regalready"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/ALREADY_REG"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regbutton"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/regbutton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

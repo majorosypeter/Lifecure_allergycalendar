@@ -1,5 +1,6 @@
 package com.peter_majorosy.lifecure_allergycalendar.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
     }
 
 
+    @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -34,10 +36,11 @@ class HomeFragment : Fragment() {
         val sdf = SimpleDateFormat("yyyy.MM.dd")
         val currentDate = sdf.format(Date())
 
-        seekBar.setOnSeekBarChangeListener(object: OnSeekBarChangeListener{
+        seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 tv_seekbar.text = progress.toString()
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -51,7 +54,7 @@ class HomeFragment : Fragment() {
         }
 
         btn_photo.setOnClickListener {
-            var fragment = CameraFragment()
+            val fragment = CameraFragment()
             activity?.supportFragmentManager?.beginTransaction()?.apply {
                 replace(R.id.fl_wrapper, fragment)
                 commit()
@@ -67,8 +70,7 @@ class HomeFragment : Fragment() {
 
         if (symptoms.text.isEmpty()) {
             symptoms.error = "This field can not be empty"
-        } else if (tv_seekbar.text.toString() == "0")
-        {
+        } else if (tv_seekbar.text.toString() == "0") {
             tv_seekbar.error = "Please choose severity between 1 to 10"
         } else {
             addData(data)

@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="6dp"
     android:layout_marginStart="6dp"
+    android:layout_marginTop="6dp"
     android:layout_marginEnd="6dp"
     app:cardCornerRadius="30dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:background="@drawable/rv_backround">
+        android:background="@drawable/rv_backround"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_dbname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:text="Name"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_alignParentStart="true"/>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/tv_dbcontent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_dbname"
             android:text="Content"
-            android:layout_below="@id/tv_dbname"/>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/tv_dbuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User"
             android:layout_below="@id/tv_dbcontent"
             android:layout_alignParentEnd="true"
-            android:textStyle="italic"/>
+            android:text="Author"
+            android:textStyle="italic"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/btn_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_like_off"
-            android:layout_alignParentStart="true"
             android:layout_below="@id/tv_dbuser"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="6dp"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:src="@drawable/ic_like_off" />
 
         <ImageView
             android:id="@+id/btn_dislike"
@@ -57,8 +61,8 @@
             android:layout_below="@id/tv_dbuser"
             android:layout_marginStart="40dp"
             android:layout_marginTop="3dp"
-            android:src="@drawable/ic_dislike_off"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:src="@drawable/ic_dislike_off" />
 
         <TextView
             android:id="@+id/tv_likecntr"
@@ -67,7 +71,8 @@
             android:layout_below="@id/btn_like"
             android:layout_marginStart="11dp"
             android:text="X"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/tv_dislikecntr"
@@ -77,11 +82,9 @@
             android:layout_marginStart="47dp"
             android:text="Y"
             android:textStyle="italic"
-            />
+            tools:ignore="HardcodedText" />
 
     </RelativeLayout>
-
-
 
 
 </androidx.cardview.widget.CardView>

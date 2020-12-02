@@ -1,5 +1,6 @@
 package com.peter_majorosy.lifecure_allergycalendar.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ class CalendarFragment : Fragment() {
 
     private lateinit var adapter: RvAdapter
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

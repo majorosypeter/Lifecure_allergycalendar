@@ -4,27 +4,27 @@
     <item
         android:id="@+id/gallery"
         android:icon="@drawable/ic_gallery"
-        android:title="Gallery" />
+        android:title="@string/GALLERY" />
 
     <item
         android:id="@+id/calendar"
         android:icon="@drawable/ic_calendar"
-        android:title="Calendar" />
+        android:title="@string/CALENDAR" />
 
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="@string/HOME" />
 
     <item
         android:id="@+id/database"
         android:icon="@drawable/ic_database"
-        android:title="Database" />
+        android:title="@string/DATABASE" />
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_profile"
-        android:title="Profile" />
+        android:title="@string/PROFILE" />
 
 
 </menu>

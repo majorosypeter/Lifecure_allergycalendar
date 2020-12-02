@@ -68,14 +68,14 @@
         android:id="@+id/seekBar"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/severity"
+        android:layout_margin="20dp"
+        android:background="@drawable/et_custom"
+        android:max="10"
+        android:min="0"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:min="0"
-        android:max="10"
-        android:progress="0"
-        android:layout_margin="20dp"
-        android:background="@drawable/et_custom" />
+        app:layout_constraintTop_toBottomOf="@id/severity" />
 
     <TextView
         android:id="@+id/tv_seekbar"
@@ -85,7 +85,8 @@
         android:text="0"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/severity"
-        app:layout_constraintTop_toBottomOf="@+id/symptoms" />
+        app:layout_constraintTop_toBottomOf="@+id/symptoms"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/severity"

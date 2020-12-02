@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tv_email.text = auth.currentUser?.email
-        ref.document(auth.currentUser?.uid.toString()).get().addOnSuccessListener {snapshot ->
+        ref.document(auth.currentUser?.uid.toString()).get().addOnSuccessListener { snapshot ->
             tv_profile.text = snapshot["name"].toString()
         }
 

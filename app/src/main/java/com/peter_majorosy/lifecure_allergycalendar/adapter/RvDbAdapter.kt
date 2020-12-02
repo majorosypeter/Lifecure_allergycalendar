@@ -65,83 +65,83 @@ class RvDbAdapter(options: FirestoreRecyclerOptions<FirebaseModel>) :
             }
         }
 
-            holder.btnlike.setOnClickListener {
-                //uid alapján user megkeresése
-                ref.document(currentuser).get()
-                    .addOnSuccessListener { snapshot ->
-                        if (snapshot != null) {
-                            //létezik-e az adott User listájában az adott dokumentumId(Food), mi az értéke(Like/Dislike)
-                            val docid = snapshot.getString(model.id)
-                            Log.d("docid", docid.toString())
-                            if (docid != null) {
-                                Log.d("status", "docid != null")
-                                if (docid.toInt() == 1) {
-                                    //Likeolta már, levenni a likeot, törölni az user dokumentumából az id-t, Csökkenteni a likeok számát 1-gyel
-                                    holder.btnlike.setImageResource(R.drawable.ic_like_off)
-                                    val updates = hashMapOf<String, Any>(
-                                        model.id to FieldValue.delete())
-                                    ref.document(currentuser).update(updates)
-                                    decreaseLikes(model)
+        holder.btnlike.setOnClickListener {
+            //uid alapján user megkeresése
+            ref.document(currentuser).get()
+                .addOnSuccessListener { snapshot ->
+                    if (snapshot != null) {
+                        //létezik-e az adott User listájában az adott dokumentumId(Food), mi az értéke(Like/Dislike)
+                        val docid = snapshot.getString(model.id)
+                        Log.d("docid", docid.toString())
+                        if (docid != null) {
+                            Log.d("status", "docid != null")
+                            if (docid.toInt() == 1) {
+                                //Likeolta már, levenni a likeot, törölni az user dokumentumából az id-t, Csökkenteni a likeok számát 1-gyel
+                                holder.btnlike.setImageResource(R.drawable.ic_like_off)
+                                val updates = hashMapOf<String, Any>(
+                                    model.id to FieldValue.delete())
+                                ref.document(currentuser).update(updates)
+                                decreaseLikes(model)
 
-                                } else if (docid.toInt() == 0) {
-                                    //dislikeolta már, likeolni, levenni a dislikeot, dokumentum id-hoz tartozó értéket 1-be állítani, csökkenteni a dislikeot, növelni a likeot
-                                    holder.btnlike.setImageResource(R.drawable.ic_like_on)
-                                    holder.btndislike.setImageResource(R.drawable.ic_dislike_off)
-                                    ref.document(currentuser)
-                                        .update(model.id, "1")
-                                    increaseLikes(model)
-                                    decreaseDislikes(model)
-                                }
-                            } else {
-                                Log.d("status", "nemletezik")
-                                //nem létezik a listájában ->  Likeolni, hozzáadni az adatbázishoz a dokumentum(Food) id-ját, 1-be állítani, növelni a likeot
+                            } else if (docid.toInt() == 0) {
+                                //dislikeolta már, likeolni, levenni a dislikeot, dokumentum id-hoz tartozó értéket 1-be állítani, csökkenteni a dislikeot, növelni a likeot
                                 holder.btnlike.setImageResource(R.drawable.ic_like_on)
+                                holder.btndislike.setImageResource(R.drawable.ic_dislike_off)
                                 ref.document(currentuser)
                                     .update(model.id, "1")
                                 increaseLikes(model)
+                                decreaseDislikes(model)
                             }
+                        } else {
+                            Log.d("status", "nemletezik")
+                            //nem létezik a listájában ->  Likeolni, hozzáadni az adatbázishoz a dokumentum(Food) id-ját, 1-be állítani, növelni a likeot
+                            holder.btnlike.setImageResource(R.drawable.ic_like_on)
+                            ref.document(currentuser)
+                                .update(model.id, "1")
+                            increaseLikes(model)
                         }
                     }
-            }
-
-            holder.btndislike.setOnClickListener {
-                //uid alapján user megkeresése
-                ref.document(currentuser).get()
-                    .addOnSuccessListener { snapshot ->
-                        if (snapshot != null) {
-                            //létezik-e az adott User listájában az adott dokumentumId(Food), mi az értéke(Like/Dislike)
-                            val docid = snapshot.getString(model.id)
-
-                            Log.d("dokumentumid", docid.toString())
-                            if (docid != null) {
-                                if (docid.toInt() != 1) {
-                                    //Disikeolta már, levenni a dislikeot, törölni az user dokumentumából az id-t, csökkenteni a dislikeot
-                                    holder.btndislike.setImageResource(R.drawable.ic_dislike_off)
-                                    val updates = hashMapOf<String, Any>(
-                                        model.id to FieldValue.delete())
-                                    ref.document(currentuser).update(updates)
-                                    decreaseDislikes(model)
-                                } else {
-                                    //likeolta már, dislikeolni, levenni a likeot, dokumentum id-hoz tartozó értéket 0-ba állítani, növelni a dislikeot, csökkenteni a likeot
-                                    holder.btnlike.setImageResource(R.drawable.ic_like_off)
-                                    holder.btndislike.setImageResource(R.drawable.ic_dislike_on)
-                                    ref.document(currentuser)
-                                        .update(model.id, "0")
-                                    increaseDislikes(model)
-                                    decreaseLikes(model)
-                                }
-                            } else {
-                                //nem létezik a listájában ->  dislikeolni, hozzáadni az adatbázishoz a dokumentum(Food) id-ját, 0-ba állítani, növelni a dislikeot
-                                holder.btndislike.setImageResource(R.drawable.ic_dislike_on)
-                                val update: MutableMap<String, Any> = HashMap()
-                                update[model.id] = "0"
-                                ref.document(currentuser).update(update)
-                                increaseDislikes(model)
-                            }
-                        }
-                    }
-            }
+                }
         }
+
+        holder.btndislike.setOnClickListener {
+            //uid alapján user megkeresése
+            ref.document(currentuser).get()
+                .addOnSuccessListener { snapshot ->
+                    if (snapshot != null) {
+                        //létezik-e az adott User listájában az adott dokumentumId(Food), mi az értéke(Like/Dislike)
+                        val docid = snapshot.getString(model.id)
+
+                        Log.d("dokumentumid", docid.toString())
+                        if (docid != null) {
+                            if (docid.toInt() != 1) {
+                                //Disikeolta már, levenni a dislikeot, törölni az user dokumentumából az id-t, csökkenteni a dislikeot
+                                holder.btndislike.setImageResource(R.drawable.ic_dislike_off)
+                                val updates = hashMapOf<String, Any>(
+                                    model.id to FieldValue.delete())
+                                ref.document(currentuser).update(updates)
+                                decreaseDislikes(model)
+                            } else {
+                                //likeolta már, dislikeolni, levenni a likeot, dokumentum id-hoz tartozó értéket 0-ba állítani, növelni a dislikeot, csökkenteni a likeot
+                                holder.btnlike.setImageResource(R.drawable.ic_like_off)
+                                holder.btndislike.setImageResource(R.drawable.ic_dislike_on)
+                                ref.document(currentuser)
+                                    .update(model.id, "0")
+                                increaseDislikes(model)
+                                decreaseLikes(model)
+                            }
+                        } else {
+                            //nem létezik a listájában ->  dislikeolni, hozzáadni az adatbázishoz a dokumentum(Food) id-ját, 0-ba állítani, növelni a dislikeot
+                            holder.btndislike.setImageResource(R.drawable.ic_dislike_on)
+                            val update: MutableMap<String, Any> = HashMap()
+                            update[model.id] = "0"
+                            ref.document(currentuser).update(update)
+                            increaseDislikes(model)
+                        }
+                    }
+                }
+        }
+    }
 
 
     private fun decreaseLikes(model: FirebaseModel) {

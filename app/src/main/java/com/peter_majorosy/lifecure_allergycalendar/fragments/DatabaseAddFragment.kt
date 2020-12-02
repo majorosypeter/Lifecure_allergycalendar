@@ -1,7 +1,6 @@
 package com.peter_majorosy.lifecure_allergycalendar.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.peter_majorosy.lifecure_allergycalendar.R
-import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.fragment_databaseadd.*
 
 class DatabaseAddFragment : DialogFragment() {
@@ -40,13 +38,13 @@ class DatabaseAddFragment : DialogFragment() {
             val foodName: String = et_foodname.text.toString()
             val ingredients: String = et_ingredients.text.toString()
 
-            if(foodName.isEmpty()){
+            if (foodName.isEmpty()) {
                 et_foodname.error = "This field can not be empty."
                 et_foodname.requestFocus()
-            }else if (ingredients.isEmpty()){
+            } else if (ingredients.isEmpty()) {
                 et_ingredients.error = "This field can not be empty."
                 et_ingredients.requestFocus()
-            }else{
+            } else {
                 saveToFirestore(foodName, ingredients)
             }
         }
@@ -71,7 +69,7 @@ class DatabaseAddFragment : DialogFragment() {
                 "Could not add $foodName to database",
                 Toast.LENGTH_SHORT).show()
         }
-        
+
         db.collection("User").document(auth.uid!!).get().addOnSuccessListener { snapshot ->
             val author: MutableMap<String, Any> = HashMap()
             author["author"] = snapshot.getString("name")!!

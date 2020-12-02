@@ -1,10 +1,10 @@
 package com.peter_majorosy.lifecure_allergycalendar.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -21,19 +21,13 @@ import androidx.core.content.FileProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.StorageTask
-import com.google.firebase.storage.ktx.storage
 import com.peter_majorosy.lifecure_allergycalendar.R
 import kotlinx.android.synthetic.main.fragment_camera.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.jar.Manifest
 
 private const val PERMISSION_CODE = 1
 private const val REQ_CODE = 2
@@ -42,7 +36,7 @@ class CameraFragment : Fragment() {
 
     private lateinit var currentPhotoPath: String
     private val storageref = FirebaseStorage.getInstance().reference.child("Images")
-    private lateinit var uri : Uri
+    private lateinit var uri: Uri
     private val auth = FirebaseAuth.getInstance().currentUser!!.uid
     private val collectionref = FirebaseFirestore.getInstance().collection("User").document(auth)
 
@@ -63,7 +57,6 @@ class CameraFragment : Fragment() {
         btn_upload.setOnClickListener {
             uploadImage(uri)
         }
-
     }
 
     private fun askPermission() {
@@ -98,14 +91,14 @@ class CameraFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ_CODE && resultCode == Activity.RESULT_OK) {
-            var file = File(currentPhotoPath)
+            val file = File(currentPhotoPath)
             uri = Uri.fromFile(file)
 
             image_preview.setImageURI(Uri.fromFile(file))
         }
     }
 
-    private fun uploadImage( uri: Uri?) {
+    private fun uploadImage(uri: Uri?) {
         val progressBar = ProgressDialog(this.context!!)
         progressBar.setMessage("Uploading")
         progressBar.show()
@@ -118,9 +111,6 @@ class CameraFragment : Fragment() {
                 fileRef.downloadUrl.addOnSuccessListener { uri ->
                     Log.d(tag, "Success: URL = $uri")
                     Toast.makeText(this.context!!, "Uploaded", Toast.LENGTH_SHORT).show()
-
-                    var update = hashMapOf(
-                        "imageReferences" to "")
 
                     collectionref.update("imageReferences", FieldValue.arrayUnion(uri.toString()))
 
@@ -135,7 +125,8 @@ class CameraFragment : Fragment() {
         }
     }
 
-
+    //developer.android.com dokumentáció szerinti képkészítés
+    @SuppressLint("SimpleDateFormat")
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name

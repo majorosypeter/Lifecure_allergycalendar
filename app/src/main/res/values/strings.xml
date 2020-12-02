@@ -25,5 +25,10 @@
     <string name="EMAIL">E-mail</string>
     <string name="UPLOAD">Upload</string>
     <string name="TAKE_A_PIC_SENTENCE">Take a picture of your symptom</string>
+    <string name="GALLERY">Gallery</string>
+    <string name="CALENDAR">Calendar</string>
+    <string name="HOME">Home</string>
+    <string name="DATABASE">Database</string>
+    <string name="PROFILE">Profile</string>
 
 </resources>

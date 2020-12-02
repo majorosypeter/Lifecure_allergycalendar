@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".LoginActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         app:cardCornerRadius="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60dp"
-        android:id="@+id/logo">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/app_logo"/>
+            android:src="@drawable/app_logo" />
 
     </androidx.cardview.widget.CardView>
 
@@ -29,41 +29,41 @@
         android:id="@+id/logemail"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/et_custom"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="10dp"
         android:hint="@string/EMAIL"
         android:inputType="textEmailAddress"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/et_custom"
-        android:padding="10dp" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
         android:id="@+id/logpw"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/et_custom"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="10dp"
         android:hint="@string/PASSWORD"
         android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logemail"
-        android:background="@drawable/et_custom"
-        android:padding="10dp"
-        android:layout_marginTop="6dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/logemail" />
 
     <TextView
         android:id="@+id/notreg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/NOT_REG"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logpw"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/logpw" />
 
     <Button
         android:id="@+id/logbutton"

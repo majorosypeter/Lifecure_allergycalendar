@@ -32,7 +32,7 @@ class DatabaseFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        var options: FirestoreRecyclerOptions<FirebaseModel> =
+        val options: FirestoreRecyclerOptions<FirebaseModel> =
             FirestoreRecyclerOptions.Builder<FirebaseModel>()
                 .setQuery(collectionref, FirebaseModel::class.java)
                 .build()
@@ -42,13 +42,13 @@ class DatabaseFragment : Fragment() {
             LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
         rv_db.adapter = adapter
 
-        et_search.addTextChangedListener(object: TextWatcher{
+        et_search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                if(s.toString().isEmpty()){
-                    var options: FirestoreRecyclerOptions<FirebaseModel> =
+                if (s.toString().isEmpty()) {
+                    val options: FirestoreRecyclerOptions<FirebaseModel> =
                         FirestoreRecyclerOptions.Builder<FirebaseModel>()
                             .setQuery(collectionref, FirebaseModel::class.java)
                             .build()
@@ -65,7 +65,7 @@ class DatabaseFragment : Fragment() {
         })
 
         fab_db.setOnClickListener {
-            var addFragment = DatabaseAddFragment()
+            val addFragment = DatabaseAddFragment()
             addFragment.show(fragmentManager!!, "databaseaddfragment")
         }
     }

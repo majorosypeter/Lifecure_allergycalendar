@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,7 +15,6 @@ import com.peter_majorosy.lifecure_allergycalendar.data_Room.AppDatabase
 import com.peter_majorosy.lifecure_allergycalendar.data_Room.DataModel
 import kotlinx.android.synthetic.main.rv_row.view.*
 import kotlin.concurrent.thread
-import androidx.core.graphics.drawable.toDrawable as toDrawable
 
 class RvAdapter(var context: Context) :
     ListAdapter<DataModel, RvAdapter.ViewHolder>(FoodDiffCallback()) {
@@ -26,6 +24,7 @@ class RvAdapter(var context: Context) :
         val tvItem: TextView = itemView.tv_rvdata
         var emoticon: ImageView = itemView.emoticon
         val severity: TextView = itemView.tv_severity
+
         //Deletebutton
         val btnDelete: ImageView = itemView.btn_delete
     }
@@ -37,6 +36,7 @@ class RvAdapter(var context: Context) :
     }
 
     //Értékadás, mi jelenjen meg egy soron (sorok száma függvényében kerül meghívásra)
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position)
         //default értékek betöltése, az újrafelhasználási hiba elkerülésére
