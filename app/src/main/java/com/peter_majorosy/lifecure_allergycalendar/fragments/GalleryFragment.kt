@@ -50,8 +50,9 @@ class GalleryFragment : Fragment() {
         documentref.get().addOnSuccessListener { snapshot ->
             val smt = snapshot.get("imageReferences").toString()
 
+
             //ha nincs elmentett fénykép, ne próbáljon keresni
-            if (smt != "null") {
+            if (smt != "null" && smt != "[]") {
                 val list = smt.split(",").map { it.trim() }
 
                 //lista elemeinek megfelelően adatmodel összeállítása
@@ -63,15 +64,19 @@ class GalleryFragment : Fragment() {
 
                         adapter.addItem(ImageModel(date, iterator))
                     }.addOnFailureListener {
-                        Toast.makeText(context!!,
-                            "Couldn't find images to load.",
-                            Toast.LENGTH_SHORT).show()
+                        errorToast()
                     }
                 }
+            } else {
+                errorToast()
             }
         }.addOnFailureListener {
-            Toast.makeText(context!!, "Couldn't find images to load.", Toast.LENGTH_SHORT).show()
+            errorToast()
         }
 
+    }
+
+    private fun errorToast() {
+        Toast.makeText(context!!, "Couldn't find images to load.", Toast.LENGTH_SHORT).show()
     }
 }
