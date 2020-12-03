@@ -50,6 +50,7 @@ class RvGalleryAdapter : RecyclerView.Adapter<RvGalleryAdapter.ViewHolder> {
             documentref.update("imageReferences", FieldValue.arrayRemove(list[position].url))
             list.removeAt(position)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemCount)
         }
     }
 
