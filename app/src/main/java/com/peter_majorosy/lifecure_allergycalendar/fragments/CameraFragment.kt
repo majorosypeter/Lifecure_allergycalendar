@@ -36,7 +36,7 @@ class CameraFragment : Fragment() {
 
     private lateinit var currentPhotoPath: String
     private val storageref = FirebaseStorage.getInstance().reference.child("Images")
-    private lateinit var uri: Uri
+    private var uri: Uri? = null
     private val auth = FirebaseAuth.getInstance().currentUser!!.uid
     private val collectionref = FirebaseFirestore.getInstance().collection("User").document(auth)
 
@@ -44,7 +44,6 @@ class CameraFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
@@ -55,10 +54,16 @@ class CameraFragment : Fragment() {
         }
 
         btn_upload.setOnClickListener {
-            uploadImage(uri)
+            //készült-e már fénykép?
+            if (uri != null) {
+                uploadImage(uri)
+            } else {
+                Toast.makeText(context, "Take a picture first", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
+    //Engedélykérés
     private fun askPermission() {
         //van-e már engedély?
         if (ContextCompat.checkSelfPermission(this.context!!,
@@ -72,6 +77,7 @@ class CameraFragment : Fragment() {
         }
     }
 
+    //Engedélykérés eredményének kiértékelése
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -88,6 +94,7 @@ class CameraFragment : Fragment() {
         }
     }
 
+    //Fényképezés eredményének kiértékelése
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ_CODE && resultCode == Activity.RESULT_OK) {
@@ -98,38 +105,40 @@ class CameraFragment : Fragment() {
         }
     }
 
+    //Fénykép feltöltése
     private fun uploadImage(uri: Uri?) {
         val progressBar = ProgressDialog(this.context!!)
         progressBar.setMessage("Uploading")
         progressBar.show()
 
-        Log.d("uri", uri.toString())
+        val fileRef = storageref.child(System.currentTimeMillis().toString() + ".jpg")
+        val uploadtask = fileRef.putFile(uri!!)
+        progressBar.setOnCancelListener {
+            //A felhasználó megszakítja a folyamatot
+            uploadtask.cancel()
+        }
+        uploadtask.addOnSuccessListener {
+            fileRef.downloadUrl.addOnSuccessListener { uri ->
+                Log.d(tag, "Success: URL = $uri")
+                Toast.makeText(this.context, "Uploaded", Toast.LENGTH_SHORT).show()
 
-        if (uri != null) {
-            val fileRef = storageref.child(System.currentTimeMillis().toString() + ".jpg")
-            fileRef.putFile(uri).addOnSuccessListener {
-                fileRef.downloadUrl.addOnSuccessListener { uri ->
-                    Log.d(tag, "Success: URL = $uri")
-                    Toast.makeText(this.context!!, "Uploaded", Toast.LENGTH_SHORT).show()
+                collectionref.update("imageReferences", FieldValue.arrayUnion(uri.toString()))
 
-                    collectionref.update("imageReferences", FieldValue.arrayUnion(uri.toString()))
-
-                    progressBar.dismiss()
-                }
-
-            }.addOnFailureListener {
-                Toast.makeText(this.context!!, "Upload failed", Toast.LENGTH_SHORT).show()
                 progressBar.dismiss()
             }
-
+        }.addOnFailureListener {
+            Toast.makeText(this.context, "Upload failed", Toast.LENGTH_SHORT).show()
+            progressBar.dismiss()
         }
+
+        Log.d("uri", uri.toString())
     }
 
     //developer.android.com dokumentáció szerinti képkészítés
     @SuppressLint("SimpleDateFormat")
     @Throws(IOException::class)
+    //Képfájl létrehozása
     private fun createImageFile(): File {
-        // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File = activity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile(
@@ -137,23 +146,23 @@ class CameraFragment : Fragment() {
             ".jpg", /* suffix */
             storageDir /* directory */
         ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
+            // Fájl mentése meghatározott path alapján történik
             currentPhotoPath = absolutePath
         }
     }
 
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            // Ensure that there's a camera activity to handle the intent
+            // Van-e kamera alkalmazás?
             takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
-                // Create the File where the photo should go
+                // A fénykép fájl elkészítése
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    // Error occurred while creating the File
+                    // Hiba a file készítése közben
                     null
                 }
-                // Continue only if the File was successfully created
+                // Ha sikeresen elkészült a file
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         this.context!!,
@@ -166,5 +175,4 @@ class CameraFragment : Fragment() {
             }
         }
     }
-
 }

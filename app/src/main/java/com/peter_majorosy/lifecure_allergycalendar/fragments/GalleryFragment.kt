@@ -30,7 +30,6 @@ class GalleryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_gallery, container, false)
         createModelList()
         adapter = RvGalleryAdapter(context!!, mutableListOf())
@@ -44,25 +43,25 @@ class GalleryFragment : Fragment() {
         rv_gallery.layoutManager = GridLayoutManager(context, 2)
     }
 
-
+//Lista összeállítása
     @SuppressLint("SimpleDateFormat")
     private fun createModelList() {
         documentref.get().addOnSuccessListener { snapshot ->
             val smt = snapshot.get("imageReferences").toString()
 
-
             //ha nincs elmentett fénykép, ne próbáljon keresni
             if (smt != "null" && smt != "[]") {
+                //Lista összeállítása, regex
                 val list = smt.split(",").map { it.trim() }
 
                 //lista elemeinek megfelelően adatmodel összeállítása
                 (list.indices).forEach { i ->
-                    val iterator = list[i].replace("[", "").replace("]", "")
-                    storageref.getReferenceFromUrl(iterator).metadata.addOnSuccessListener { metadata ->
+                    val url = list[i].replace("[", "").replace("]", "")
+                    storageref.getReferenceFromUrl(url).metadata.addOnSuccessListener { metadata ->
                         val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd HH:mm:ss")
                         val date = simpleDateFormat.format(metadata.creationTimeMillis)
 
-                        adapter.addItem(ImageModel(date, iterator))
+                        adapter.addItem(ImageModel(date, url))
                     }.addOnFailureListener {
                         errorToast()
                     }
@@ -76,6 +75,7 @@ class GalleryFragment : Fragment() {
 
     }
 
+    //Hibaüzenet a felhasználónak
     private fun errorToast() {
         Toast.makeText(context!!, "Couldn't find images to load.", Toast.LENGTH_SHORT).show()
     }

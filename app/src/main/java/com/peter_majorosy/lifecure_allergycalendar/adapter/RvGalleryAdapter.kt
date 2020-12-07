@@ -42,7 +42,8 @@ class RvGalleryAdapter : RecyclerView.Adapter<RvGalleryAdapter.ViewHolder> {
         holder.tvdate.text = list[position].date
         Picasso.get().load(list[position].url).fit().centerCrop().into(holder.image)
 
-
+        //Elem törlése: Storage-ról, hivatkozás Firestore-ról,
+        //a listából, adapter értesítése a változásokról
         holder.btndelete.setOnClickListener {
             val documentref = FirebaseFirestore.getInstance().collection("User").document(
                 FirebaseAuth.getInstance().currentUser!!.uid)
@@ -58,6 +59,7 @@ class RvGalleryAdapter : RecyclerView.Adapter<RvGalleryAdapter.ViewHolder> {
         return list.size
     }
 
+    //Új listaelem hozzáadása
     fun addItem(item: ImageModel) {
         list.add(item)
         notifyItemInserted(list.lastIndex)

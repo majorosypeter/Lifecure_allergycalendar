@@ -43,8 +43,7 @@ class CalendarFragment : Fragment() {
         rv_calendar.layoutManager =
             LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
 
-
-
+        //Dátum kiválasztása
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val day = if (dayOfMonth < 10) "0$dayOfMonth"
             else "$dayOfMonth"
@@ -55,13 +54,14 @@ class CalendarFragment : Fragment() {
 
             val dateSelected = "$year.$perfectMonth.$day"
 
-            //formátum tesztelése
+            //Formátum tesztelése
             Log.d("dateselected", dateSelected)
 
             loadList(dateSelected)
         }
     }
 
+    //Lista feltöltése és átadása az adapternek
     private fun loadList(dateSelected: String) {
         AppDatabase.getInstance(this.context!!).dataDAO().getSpecificData(dateSelected)
             .observe(this, Observer { items ->
